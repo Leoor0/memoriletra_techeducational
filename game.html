@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MemoriLetra — Partida</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <header class="app-header">
+    <h1>MemoriLetra <small>Partida</small></h1>
+    <nav><a href="index.html" class="link">⟵ Voltar</a></nav>
+  </header>
+
+  <main class="container">
+    <section class="info-bar card p-3">
+      <div><strong>Fase:</strong> <span id="faseLabel">-</span></div>
+      <div><strong>Tema:</strong> <span id="temaLabel">-</span></div>
+      <div><strong>Estrelas:</strong> <span id="stars">0</span></div>
+      <div><strong>Tempo:</strong> <span id="timer">05:00</span></div>
+
+      <div class="right">
+        <button id="speakBtn" class="btn-sm">Ouvir palavra</button>
+        <button id="csvBtn" class="btn-sm">Baixar CSV</button>
+      </div>
+    </section>
+
+    <section class="card p-4">
+      <div id="board" class="board"></div>
+    </section>
+  </main>
+
+  <!-- Modal -->
+  <div id="modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modalTitle">
+    <div class="modal-content card p-4">
+      <h3 id="modalTitle">Digite o nome da figura</h3>
+      <p id="hint"></p>
+      <input id="answer" type="text" class="input" placeholder="escreva aqui"/>
+      <div class="actions">
+        <button id="confirmBtn" class="btn">Confirmar</button>
+        <button id="cancelBtn" class="btn-outline">Pular</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="app-footer">
+    <small>© <span id="year"></span> Techeducational</small>
+  </footer>
+
+  <script src="game.js"></script>
+</body>
+</html>

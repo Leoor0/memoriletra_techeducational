@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MemoriLetra — Techeducational</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <header class="app-header">
+    <h1>MemoriLetra <small>by Techeducational</small></h1>
+    <p class="tagline">Jogo de memória com escrita de palavras para alfabetização</p>
+  </header>
+
+  <main class="container">
+    <section class="card p-4">
+      <h2>Configurar partida</h2>
+      <div class="form-grid">
+        <label for="fase">Fase</label>
+        <select id="fase">
+          <option value="1">Fase 1 — 2x2 (palavras curtas)</option>
+          <option value="2">Fase 2 — 3x2 (dica: 1ª letra)</option>
+          <option value="3">Fase 3 — 3x4 (4–6 letras)</option>
+          <option value="4">Fase 4 — 4x4 (com NH/CH/LH)</option>
+        </select>
+
+        <label for="tema">Tema</label>
+        <select id="tema">
+          <option value="animais">Animais</option>
+          <option value="frutas">Frutas</option>
+          <option value="objetos">Objetos escolares</option>
+          <option value="cores_formas">Formas/Cores</option>
+          <option value="numeros">Números por extenso</option>
+        </select>
+      </div>
+
+      <div class="actions">
+        <button id="startBtn" class="btn">Começar</button>
+      </div>
+    </section>
+
+    <section class="card p-4">
+      <h2>Progresso (local)</h2>
+      <div id="progress"></div>
+      <button id="resetProgress" class="btn-outline">Limpar progresso</button>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <small>© <span id="year"></span> Techeducational — Projeto acadêmico APSII</small>
+  </footer>
+
+  <script>
+    document.getElementById('startBtn').addEventListener('click', () => {
+      const fase = document.getElementById('fase').value;
+      const tema = document.getElementById('tema').value;
+      window.location.href = `game.html?fase=${fase}&tema=${encodeURIComponent(tema)}`;
+    });
+
+    function loadProgress() {
+      const data = JSON.parse(localStorage.getItem('memoriletra_progress') || '{}');
+      const html = Object.keys(data).length === 0
+        ? '<p>Nenhum progresso salvo ainda.</p>'
+        : '<ul>' + Object.entries(data).map(([k,v]) => `<li><strong>${k}</strong>: ${v} ⭐</li>`).join('') + '</ul>';
+      document.getElementById('progress').innerHTML = html;
+    }
+    document.getElementById('resetProgress').addEventListener('click', () => {
+      localStorage.removeItem('memoriletra_progress');
+      loadProgress();
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+    loadProgress();
+  </script>
+</body>
+</html>
